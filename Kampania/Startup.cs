@@ -28,6 +28,7 @@ namespace Kampania
         {
             services.AddControllers();
             services.AddScoped<ICampaignRepository>(p => new CampaignRepository("Server=(LocalDb)\\MSSQLLocalDB;Database=Campaigns;Trusted_Connection=True;"));
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +42,7 @@ namespace Kampania
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseAuthorization();
 
